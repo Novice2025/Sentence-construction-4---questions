@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>NEXTATION – Questions in English (Do / Does / Did / To Be / WH)</title>
+  <style>
+    :root {
+      /* NEXTATION WEBSITE — COLOUR SYSTEM (from your PDF) */
+      --bg-main: #02030b; /* Page background */
+      --bg-gradient: radial-gradient(circle at top, #1c1f3b 0%, #050716 45%, #02030b 100%);
+      /* Surfaces / Cards */
+      --card-bg: rgba(15, 18, 40, 0.92);        /* Lesson panels */
+      --card-soft-bg: rgba(18, 21, 50, 0.88);   /* Tab cards and navigation buttons */
+      /* Neon accents */
+      --accent-cyan: #4ef2ff;   /* Cyan highlight around edges */
+      --accent-pink: #ff2f92;   /* Magenta highlight for buttons */
+      --accent-green: #4dff9b;  /* Success / tab completed mark */
+      --accent-yello: #ffe25f;  /* Accent blended in text gradients */
+      --accent-purple: #aa5dff; /* Hover glows and edges */
+      /* Text and borders */
+      --muted: rgba(255,255,255,0.65);
+      --border-glow: rgba(120,120,255,0.45);
+      /* Shadows */
+      --shadow-strong: 0 0 36px rgba(130,80,255,0.6);
+      --shadow-soft: 0 0 20px rgba(0,0,0,0.65);
+      /* Radii and transitions */
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-sm: 10px;
+      --transition-fast: 0.18s ease-out;
+      --transition-med: 0.28s ease-out;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{
+      font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+      background:var(--bg-gradient);
+      color:#fff;
+      min-height:100vh;
+      padding:24px;
+      display:flex;
+      justify-content:center;
+    }
+    .app{max-width:1100px;width:100%;}
+
+    /* HEADER */
+    .neon-header{
+      position:relative;
+      padding:18px 22px 14px;
+      border-radius:var(--radius-lg);
+      background:rgba(3,5,20,0.9);
+      box-shadow:var(--shadow-soft);
+      border:1px solid var(--border-glow);
+      margin-bottom:20px;
+      overflow:hidden;
+    }
+    .neon-header::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background:linear-gradient(90deg,#00f5ff,#ff2f92,#ffe25f,#4dff9b);
+      opacity:0.5;
+      mix-blend-mode:screen;
+      pointer-events:none;
+      z-index:-1;
+    }
+    .header-main{display:flex;align-items:center;gap:18px;}
+    .teacher-orb{
+      width:64px;height:64px;border-radius:50%;
+      background:radial-gradient(circle,#ffffff 0%,#00fff0 35%,#ff2f92 70%,#02030b 100%);
+      box-shadow:0 0 24px rgba(0,255,255,0.7),0 0 32px rgba(255,0,160,0.55);
+      flex-shrink:0;
+    }
+    .brand-title{
+      font-size:1.4rem;
+      background:linear-gradient(90deg,#4ef2ff,#ff2f92);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      font-weight:700;
+      letter-spacing:0.06em;
+      text-transform:uppercase;
+    }
+    .brand-sub{
+      color:var(--muted);
+      font-size:0.9rem;
+      margin-top:2px;
+    }
+    .lesson-title{
+      margin-top:10px;
+      font-size:1.25rem;
+      color:var(--accent-cyan);
+      text-shadow:0 0 12px rgba(78,242,255,0.5);
+    }
+
+    .controls-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:10px;
+      font-size:0.9rem;
+    }
+    .small-btn{
+      padding:6px 12px;
+      border-radius:999px;
+      border:1px dashed rgba(255,255,255,0.35);
+      background:transparent;
+      color:#fff;
+      cursor:pointer;
+      font-size:0.8rem;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      transition:all var(--transition-fast);
+    }
+    .small-btn:hover{
+      border-color:var(--accent-cyan);
+      box-shadow:0 0 16px rgba(78,242,255,0.5);
+      background:rgba(4,10,40,0.9);
+    }
+
+    /* TABS */
+    .tabs{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:18px 0 16px;
+    }
+    .tab{
+      padding:9px 14px;
+      border-radius:var(--radius-md);
+      background:radial-gradient(circle at top,rgba(255,255,255,0.09),rgba(7,10,28,0.96));
+      border:1px solid rgba(130,140,200,0.4);
+      color:#fff;
+      font-size:0.9rem;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      transition:all var(--transition-fast);
+    }
+    .tab:hover{
+      border-color:rgba(120,120,255,0.6);
+      box-shadow:0 0 18px rgba(120,120,255,0.35);
+    }
+    .tab.active{
+      border-color:rgba(10,220,255,0.95);
+      box-shadow:0 0 22px rgba(78,242,255,0.7);
+      background:radial-gradient(circle at top,#111633,#050716);
+    }
+    .tab .icon{font-size:1rem;}
+
+    /* PANELS */
+    .panel{
+      display:none;
+      background:var(--card-bg);
+      border-radius:var(--radius-lg);
+      border:1px solid rgba(120,120,255,0.4);
+      padding:18px 20px 20px;
+      box-shadow:var(--shadow-soft);
+    }
+    .panel.active{display:block;}
+
+    .panel h2{
+      font-size:1.1rem;
+      margin-bottom:8px;
+      color:var(--accent-cyan);
+    }
+
+    .sentence{
+      font-size:1.1rem;
+      margin-bottom:8px;
+    }
+    .sentence strong{color:var(--accent-yello);}
+
+    .blocks-line{
+      margin:6px 0 4px;
+      font-family:"JetBrains Mono","Fira Code",monospace;
+      font-size:0.9rem;
+      color:var(--accent-green);
+    }
+
+    .pt-line{
+      margin-bottom:6px;
+      font-size:0.95rem;
+      color:var(--muted);
+    }
+
+    .tip-line{
+      font-size:0.9rem;
+      margin:6px 0 10px;
+      color:#ffd4ff;
+    }
+
+    .voice-row{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin:8px 0 12px;
+      font-size:0.9rem;
+    }
+    .voice-btn{
+      padding:6px 12px;
+      border-radius:999px;
+      border:1px solid rgba(78,242,255,0.7);
+      background:rgba(3,15,35,0.9);
+      color:#fff;
+      cursor:pointer;
+      font-size:0.85rem;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      transition:all var(--transition-fast);
+    }
+    .voice-btn:hover{
+      box-shadow:0 0 16px rgba(78,242,255,0.6);
+      background:rgba(5,25,55,0.95);
+    }
+
+    .walkthrough{
+      margin-top:6px;
+      font-size:0.9rem;
+      line-height:1.6;
+    }
+    .walkthrough strong{color:var(--accent-yello);}
+
+    .steps-list{
+      margin-top:8px;
+      padding-left:1.2rem;
+      font-size:0.9rem;
+    }
+    .steps-list li{margin-bottom:4px;}
+
+    .adhd-box{
+      margin-top:10px;
+      background:rgba(10,15,40,0.9);
+      border-radius:var(--radius-md);
+      border:1px dashed rgba(255,255,255,0.3);
+      padding:10px 12px;
+      font-size:0.9rem;
+      color:var(--muted);
+    }
+    .adhd-box strong{color:var(--accent-pink);}
+
+    .mini-practice{
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius:var(--radius-md);
+      border:1px solid rgba(255,255,255,0.18);
+      background:rgba(5,10,35,0.9);
+      font-size:0.86rem;
+      display:grid;
+      gap:6px;
+    }
+    .mini-practice label{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+    }
+    .mini-input{
+      padding:5px 8px;
+      border-radius:999px;
+      border:1px solid rgba(160,160,220,0.7);
+      background:rgba(3,8,25,0.9);
+      color:#fff;
+      font-size:0.85rem;
+    }
+
+    .exercise-box{
+      margin-top:14px;
+      padding:12px 12px;
+      border-radius:var(--radius-md);
+      border:1px solid rgba(120,120,255,0.5);
+      background:rgba(6,12,40,0.95);
+      font-size:0.9rem;
+    }
+    .exercise-box select,
+    .exercise-box textarea{
+      margin-top:4px;
+      margin-bottom:6px;
+      font-size:0.85rem;
+      border-radius:var(--radius-sm);
+      border:1px solid rgba(160,160,220,0.7);
+      background:rgba(3,8,25,0.95);
+      color:#fff;
+      padding:4px 6px;
+      width:100%;
+    }
+    .exercise-box textarea{min-height:50px;resize:vertical;}
+    .exercise-box button{
+      margin-top:4px;
+      padding:6px 12px;
+      border-radius:999px;
+      border:none;
+      background:linear-gradient(135deg,var(--accent-pink),var(--accent-cyan));
+      color:#050618;
+      cursor:pointer;
+      font-size:0.85rem;
+      font-weight:600;
+    }
+    .exercise-feedback{
+      margin-top:6px;
+      font-size:0.85rem;
+    }
+
+    .footer-nav{
+      margin-top:16px;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .primary-btn,
+    .secondary-btn{
+      flex:1;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(140,140,255,0.7);
+      background:radial-gradient(circle at top,rgba(255,255,255,0.04),rgba(8,10,30,0.96));
+      color:#fff;
+      cursor:pointer;
+      font-size:0.9rem;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      transition:all var(--transition-fast);
+    }
+    .primary-btn:hover,
+    .secondary-btn:hover{
+      border-color:var(--accent-cyan);
+      box-shadow:0 0 18px rgba(78,242,255,0.55);
+    }
+
+    .export-bar{
+      margin-top:14px;
+      font-size:0.85rem;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--muted);
+    }
+
+    .footer-meta{
+      margin-top:14px;
+      font-size:0.8rem;
+      color:var(--muted);
+      text-align:right;
+    }
+    .footer-meta .brand{color:var(--accent-cyan);font-weight:600;}
+  </style>
+</head>
+<body>
+<div class="app">
+  <header class="neon-header">
+    <div class="header-main">
+      <div class="teacher-orb"></div>
+      <div>
+        <div class="brand-title">NEXTATION</div>
+        <div class="brand-sub">Perguntas em inglês em blocos – versão imersiva 🔥</div>
+        <div class="lesson-title">
+          Questions in English – Do / Does / Did / To Be / WH
+        </div>
+      </div>
+    </div>
+    <div class="controls-row">
+      <button class="small-btn" onclick="copyToSpreadsheet()">📋 Copiar conteúdo p/ planilha</button>
+      <span style="color:var(--muted);font-size:0.8rem;">
+        Foco total: entender <strong>por que</strong> começa com do/does/did e por que manter o <strong>be</strong>.
+      </span>
+    </div>
+  </header>
+
+  <!-- TABS -->
+  <nav class="tabs">
+    <button class="tab active" data-tab="overview" onclick="showTab('overview')">
+      <span class="icon">🧠</span> Overview
+    </button>
+    <button class="tab" data-tab="do-like" onclick="showTab('do-like')">
+      <span class="icon">☕</span> Do you like coffee?
+    </button>
+    <button class="tab" data-tab="where-library" onclick="showTab('where-library')">
+      <span class="icon">📚</span> Where is the library?
+    </button>
+    <button class="tab" data-tab="does-he" onclick="showTab('does-he')">
+      <span class="icon">⚽</span> Does he play football?
+    </button>
+    <button class="tab" data-tab="did-they" onclick="showTab('did-they')">
+      <span class="icon">⏳</span> Did they go to school?
+    </button>
+    <button class="tab" data-tab="what-doing" onclick="showTab('what-doing')">
+      <span class="icon">❓</span> What are you doing?
+    </button>
+    <button class="tab" data-tab="are-they" onclick="showTab('are-they')">
+      <span class="icon">📺</span> Are they watching TV?
+    </button>
+  </nav>
+
+  <main>
+    <!-- OVERVIEW -->
+    <section id="panel-overview" class="panel active">
+      <h2>🧠 Big Idea – How English questions really work</h2>
+      <p class="walkthrough">
+        Em português você pensa: <strong>“Você gosta de café?”</strong> e começa direto com <strong>Você</strong> (sujeito).
+        Em inglês, a pergunta “ativa” um <strong>verbinho auxiliar</strong> na frente.
+      </p>
+
+      <div class="adhd-box">
+        <strong>Convencendo o cérebro brasileiro (ADHD‑friendly):</strong><br/>
+        – Pense que o inglês tem um <strong>policial da frase</strong> que aparece só em pergunta e negativa.<br/>
+        – Esse policial é o <strong>DO / DOES / DID</strong> (para verbos comuns) ou o próprio <strong>BE: am / is / are / was / were</strong>.<br/>
+        – A função dele é simples: <strong>avisar que é pergunta</strong> e carregar o tempo (presente / passado).<br/>
+        – O verbo principal (like, go, watch) fica limpinho, sem conjugação louca. Quem sofre é o auxiliar. 😉
+      </div>
+
+      <div class="walkthrough" style="margin-top:10px;">
+        <strong>Regra de ouro (coloca na parede):</strong><br/>
+        1. Se a frase usa <strong>be</strong> como verbo principal (am/is/are/was/were) ou está em <strong>continuous</strong> (is doing, are watching), <br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;→ a pergunta começa com esse <strong>be</strong> ou com o <strong>WH + be</strong>.<br/>
+        2. Se a frase é simples, tipo <strong>like, play, work, study, go</strong> no presente ou passado simples, <br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;→ a pergunta começa com <strong>do / does / did</strong>.
+      </div>
+
+      <div class="adhd-box" style="margin-top:10px;">
+        <strong>Por que “do/does/did” e por que manter o “be”?</strong><br/>
+        – Em português você coloca tudo no sujeito/verbo: “Você <strong>gosta</strong>? Você <strong>gostou</strong>?”.<br/>
+        – Em inglês, o “gosta/gostou” vira um combo:
+        <ul style="margin-top:4px;padding-left:1.2rem;font-size:0.9rem;">
+          <li><strong>Do/Does/Did</strong> = carrega o tempo (presente/past) e forma a pergunta.</li>
+          <li><strong>Like</strong> = fica sempre no “modo simples” (sem -s, sem passado) na pergunta.</li>
+        </ul>
+        – Já o <strong>be</strong> (am/is/are/was/were) é tão forte que <strong>ele mesmo</strong> vira auxiliar e continua verbo principal ao mesmo tempo.
+        Você só empurra ele pra frente: <strong>He is tired → Is he tired?</strong> / <strong>They were at home → Were they at home?</strong>.
+      </div>
+
+      <!-- Existing main exercise + extra walkthrough exercises -->
+      <div class="exercise-box">
+        <strong>⚙️ EXERCISE 1 – Build the question in blocks</strong>
+        <p style="margin-top:4px;">
+          Imagine: você quer perguntar para um amigo se ele gosta de estudar inglês à noite.
+          Em português: <em>“Você gosta de estudar inglês à noite?”</em><br/>
+          Vamos montar em blocos em inglês:
+        </p>
+        <label>1. Auxiliar (Do / Does / Did / Is / Are / Was / Were)</label>
+        <select id="ex-aux">
+          <option value="">– choose –</option>
+          <option value="Do">Do</option>
+          <option value="Does">Does</option>
+          <option value="Did">Did</option>
+          <option value="Is">Is</option>
+          <option value="Are">Are</option>
+          <option value="Was">Was</option>
+          <option value="Were">Were</option>
+        </select>
+
+        <label>2. Subject (quem?)</label>
+        <select id="ex-subject">
+          <option value="">– choose –</option>
+          <option value="you">you</option>
+          <option value="he">he</option>
+          <option value="they">they</option>
+        </select>
+
+        <label>3. Verb (base form – sem -s, sem passado)</label>
+        <select id="ex-verb">
+          <option value="">– choose –</option>
+          <option value="like">like</option>
+          <option value="study">study</option>
+          <option value="go">go</option>
+        </select>
+
+        <label>4. Rest (complemento)</label>
+        <select id="ex-rest">
+          <option value="">– choose –</option>
+          <option value="English at night">English at night</option>
+          <option value="football on Sundays">football on Sundays</option>
+          <option value="to school">to school</option>
+        </select>
+
+        <label style="margin-top:6px;">Agora escreva a pergunta completa (em inglês):</label>
+        <textarea id="ex-sentence" placeholder="Digite aqui sua pergunta..."></textarea>
+
+        <button type="button" onclick="checkOverviewExercise()">Check ✅</button>
+        <div id="ex-feedback" class="exercise-feedback"></div>
+      </div>
+
+      <!-- Extra Exercise 2: DO vs DOES -->
+      <div class="exercise-box" style="margin-top:12px;">
+        <strong>⚙️ EXERCISE 2 – DO x DOES (repetição para fixar)</strong>
+        <p style="margin-top:4px;">
+          Transforme em pergunta em inglês (escreva só em inglês):
+        </p>
+        <ol class="steps-list">
+          <li>Você gosta de música? → <em>__________</em></li>
+          <li>Ele gosta de música? → <em>__________</em></li>
+        </ol>
+        <label>1) Em inglês:</label>
+        <textarea id="ex2-q1" placeholder="Do you like music?"></textarea>
+        <label>2) Em inglês:</label>
+        <textarea id="ex2-q2" placeholder="Does he like music?"></textarea>
+        <button type="button" onclick="checkOverviewExercise2()">Check 2 ✅</button>
+        <div id="ex2-feedback" class="exercise-feedback"></div>
+      </div>
+
+      <!-- Extra Exercise 3: BE vs DO -->
+      <div class="exercise-box" style="margin-top:12px;">
+        <strong>⚙️ EXERCISE 3 – BE x DO (qual começa?)</strong>
+        <p style="margin-top:4px;">
+          Diga se a pergunta começa com <strong>Be</strong> (am/is/are) ou com <strong>Do/Does</strong>:
+        </p>
+        <ol class="steps-list">
+          <li>Você feliz? → <em>Are you happy?</em> → começa com <strong>Are</strong> (verbo be).</li>
+          <li>Você trabalha aqui? → <em>Do you work here?</em> → começa com <strong>Do</strong>.</li>
+        </ol>
+        <p style="font-size:0.85rem;margin-top:4px;">
+          Faça na cabeça: “é verbo be? continuous? então começa com be; se não, começa com do/does/did”.
+        </p>
+      </div>
+    </section>
+
+    <!-- DO YOU LIKE COFFEE -->
+    <section id="panel-do-like" class="panel">
+      <h2>1️⃣ Do you like coffee?</h2>
+      <div class="sentence"><strong>Do you like coffee?</strong></div>
+      <div class="blocks-line">Blocks: <code>Do | you | like | coffee?</code></div>
+      <div class="pt-line">Portuguese: Você gosta de café?</div>
+      <div class="tip-line">
+        Tip: Presente simples (rotina) + verbo comum → comece com <strong>Do</strong> (I/you/we/they) ou <strong>Does</strong> (he/she/it).
+      </div>
+
+      <div class="voice-row">
+        <button class="voice-btn" onclick="speak('Do you like coffee?')">🔊 Play</button>
+        <span>Imagine você chegando numa reunião: “Do you like coffee?” ☕</span>
+      </div>
+
+      <div class="walkthrough">
+        <strong>Slow motion – passo a passo:</strong>
+        <ol class="steps-list">
+          <li>Pense na afirmação: <strong>You like coffee.</strong></li>
+          <li>Coloque o auxiliar na frente: <strong>Do you like coffee?</strong></li>
+          <li>Repara: o verbo principal <strong>like</strong> continua “limpo” (sem -s, sem passado).</li>
+        </ol>
+      </div>
+
+      <div class="adhd-box">
+        <strong>Macete mental:</strong> pensa que o <strong>Do</strong> é só uma lanterninha na frente: ele acende a pergunta.
+        Quem faz o sentido é <strong>you like coffee</strong>.
+      </div>
+
+      <div class="mini-practice">
+        <strong>✍️ Copie a pergunta em blocos</strong>
+        <label>1. Auxiliar:
+          <input class="mini-input" placeholder="Do" />
+        </label>
+        <label>2. Subject:
+          <input class="mini-input" placeholder="you" />
+        </label>
+        <label>3. Verb:
+          <input class="mini-input" placeholder="like" />
+        </label>
+        <label>4. Object:
+          <input class="mini-input" placeholder="coffee?" />
+        </label>
+      </div>
+
+      <!-- Extra guided exercise for DO -->
+      <div class="mini-practice">
+        <strong>✍️ Guided exercise – “Você gosta de futebol?”</strong>
+        <p style="font-size:0.85rem;">Monte a pergunta:</p>
+        <ol class="steps-list">
+          <li>Afirmativa: <strong>You like football.</strong></li>
+          <li>Pergunta: ______ you like football?</li>
+        </ol>
+        <label>Auxiliar (escreva aqui):
+          <input class="mini-input" placeholder="Do" />
+        </label>
+        <p style="font-size:0.85rem;margin-top:4px;">Resultado final (fala em voz alta): <strong>Do you like football?</strong></p>
+      </div>
+    </section>
+
+    <!-- WHERE IS THE LIBRARY -->
+    <section id="panel-where-library" class="panel">
+      <h2>2️⃣ Where is the library?</h2>
+      <div class="sentence"><strong>Where is the library?</strong></div>
+      <div class="blocks-line">Blocks: <code>Where | is | the | library?</code></div>
+      <div class="pt-line">Portuguese: Onde fica a biblioteca?</div>
+      <div class="tip-line">
+        Tip: Perguntas com <strong>to be</strong> + lugar: <strong>WH + be + subject</strong>.
+      </div>
+
+      <div class="voice-row">
+        <button class="voice-btn" onclick="speak('Where is the library?')">🔊 Play</button>
+        <span>Você está num campus novo: “Where is the library?” 📚</span>
+      </div>
+
+      <div class="walkthrough">
+        <strong>Slow motion:</strong>
+        <ol class="steps-list">
+          <li>Afirmativa: <strong>The library is here.</strong></li>
+          <li>Pergunta com “onde”: começa com <strong>Where</strong>.</li>
+          <li>Empurra o <strong>is</strong> pra frente: <strong>Where is the library?</strong></li>
+        </ol>
+      </div>
+
+      <div class="adhd-box">
+        <strong>Be é rei:</strong> ele não precisa de do/does/did. Ele mesmo sobe pra frente e vira pergunta:
+        <br/>He is tired → <strong>Is he tired?</strong>
+      </div>
+
+      <div class="mini-practice">
+        <strong>✍️ Escreva “Where is the library?” em blocos</strong>
+        <label>1. WH-word:
+          <input class="mini-input" placeholder="Where" />
+        </label>
+        <label>2. Be:
+          <input class="mini-input" placeholder="is" />
+        </label>
+        <label>3. Rest:
+          <input class="mini-input" placeholder="the library?" />
+        </label>
+      </div>
+    </section>
+
+    <!-- DOES HE PLAY FOOTBALL -->
+    <section id="panel-does-he" class="panel">
+      <h2>3️⃣ Does he play football?</h2>
+      <div class="sentence"><strong>Does he play football?</strong></div>
+      <div class="blocks-line">Blocks: <code>Does | he | play | football?</code></div>
+      <div class="pt-line">Portuguese: Ele joga futebol?</div>
+      <div class="tip-line">
+        Tip: Presente simples com <strong>he/she/it</strong> → auxiliar vira <strong>Does</strong> e o verbo principal fica sem -s.
+      </div>
+
+      <div class="voice-row">
+        <button class="voice-btn" onclick="speak('Does he play football?')">🔊 Play</button>
+        <span>Você pergunta sobre um amigo: “Does he play football?” ⚽</span>
+      </div>
+
+      <div class="walkthrough">
+        <strong>Slow motion:</strong>
+        <ol class="steps-list">
+          <li>Afirmativa: <strong>He plays football.</strong></li>
+          <li>Na pergunta, o <strong>Does</strong> leva o “S” do verbo.</li>
+          <li>Fica: <strong>Does he play football?</strong> (play sem S).</li>
+        </ol>
+      </div>
+
+      <div class="adhd-box">
+        <strong>Macete:</strong> “S” só aparece uma vez.
+        Ou fica no verbo (plays) na afirmação, ou no auxiliar (does) na pergunta. Nunca nos dois.
+      </div>
+
+      <div class="mini-practice">
+        <strong>✍️ Escreva em blocos</strong>
+        <label>1. Auxiliar:
+          <input class="mini-input" placeholder="Does" />
+        </label>
+        <label>2. Subject:
+          <input class="mini-input" placeholder="he" />
+        </label>
+        <label>3. Verb:
+          <input class="mini-input" placeholder="play" />
+        </label>
+        <label>4. Object:
+          <input class="mini-input" placeholder="football?" />
+        </label>
+      </div>
+    </section>
+
+    <!-- DID THEY GO TO SCHOOL -->
+    <section id="panel-did-they" class="panel">
+      <h2>4️⃣ Did they go to school?</h2>
+      <div class="sentence"><strong>Did they go to school?</strong></div>
+      <div class="blocks-line">Blocks: <code>Did | they | go | to school?</code></div>
+      <div class="pt-line">Portuguese: Eles foram para a escola?</div>
+      <div class="tip-line">
+        Tip: Passado simples com verbo comum → <strong>Did</strong> + sujeito + verbo base (sem -ed).
+      </div>
+
+      <div class="voice-row">
+        <button class="voice-btn" onclick="speak('Did they go to school?')">🔊 Play</button>
+        <span>Perguntando sobre ontem: “Did they go to school?” 🏫</span>
+      </div>
+
+      <div class="walkthrough">
+        <strong>Slow motion:</strong>
+        <ol class="steps-list">
+          <li>Afirmativa: <strong>They went to school.</strong></li>
+          <li>Na pergunta, o passado vai para o <strong>Did</strong>.</li>
+          <li>O verbo volta pra base: <strong>go</strong>.</li>
+          <li>Fica: <strong>Did they go to school?</strong></li>
+        </ol>
+      </div>
+
+      <div class="adhd-box">
+        <strong>Macete do passado:</strong> se tem <strong>Did</strong>, o outro verbo fica magrinho (sem passado).
+        <br/>“Did you watch the movie?” (watch sem -ed).
+      </div>
+
+      <div class="mini-practice">
+        <strong>✍️ Copie a pergunta</strong>
+        <label>1. Auxiliar:
+          <input class="mini-input" placeholder="Did" />
+        </label>
+        <label>2. Subject:
+          <input class="mini-input" placeholder="they" />
+        </label>
+        <label>3. Verb:
+          <input class="mini-input" placeholder="go" />
+        </label>
+        <label>4. Rest:
+          <input class="mini-input" placeholder="to school?" />
+        </label>
+      </div>
+    </section>
+
+    <!-- WHAT ARE YOU DOING -->
+    <section id="panel-what-doing" class="panel">
+      <h2>5️⃣ What are you doing?</h2>
+      <div class="sentence"><strong>What are you doing?</strong></div>
+      <div class="blocks-line">Blocks: <code>What | are | you | doing?</code></div>
+      <div class="pt-line">Portuguese: O que você está fazendo?</div>
+      <div class="tip-line">
+        Tip: Perguntas no presente contínuo + WH → <strong>WH + be + subject + verb-ing</strong>.
+      </div>
+
+      <div class="voice-row">
+        <button class="voice-btn" onclick="speak('What are you doing?')">🔊 Play</button>
+        <span>Você chega em casa e pergunta: “What are you doing?”</span>
+      </div>
+
+      <div class="walkthrough">
+        <strong>Slow motion:</strong>
+        <ol class="steps-list">
+          <li>Afirmativa: <strong>You are doing your homework.</strong></li>
+          <li>Pergunta com “o que”: começa com <strong>What</strong>.</li>
+          <li>Empurra o <strong>are</strong> pra frente: <strong>What are you doing?</strong></li>
+          <li>O verbo continua com -ing (doing).</li>
+        </ol>
+      </div>
+
+      <div class="adhd-box">
+        <strong>Por que não tem do/does aqui?</strong><br/>
+        Porque já existe um auxiliar forte: o <strong>are</strong>.
+        Em qualquer continuous, quem manda é o <strong>be</strong> (am/is/are).
+      </div>
+
+      <div class="mini-practice">
+        <strong>✍️ Copie em blocos</strong>
+        <label>1. WH-word:
+          <input class="mini-input" placeholder="What" />
+        </label>
+        <label>2. Auxiliar:
+          <input class="mini-input" placeholder="are" />
+        </label>
+        <label>3. Subject:
+          <input class="mini-input" placeholder="you" />
+        </label>
+        <label>4. Verb-ing:
+          <input class="mini-input" placeholder="doing?" />
+        </label>
+      </div>
+
+      <!-- Extra walkthrough – BE vs DO -->
+      <div class="mini-practice">
+        <strong>✍️ Guided: transforme em pergunta</strong>
+        <p style="font-size:0.85rem;">They are studying English → ______ they studying English?</p>
+        <label>Auxiliar que sobe:
+          <input class="mini-input" placeholder="Are" />
+        </label>
+        <p style="font-size:0.85rem;margin-top:4px;">Resultado: <strong>Are they studying English?</strong></p>
+      </div>
+    </section>
+
+    <!-- ARE THEY WATCHING TV -->
+    <section id="panel-are-they" class="panel">
+      <h2>6️⃣ Are they watching TV?</h2>
+      <div class="sentence"><strong>Are they watching TV?</strong></div>
+      <div class="blocks-line">Blocks: <code>Are | they | watching | TV?</code></div>
+      <div class="pt-line">Portuguese: Eles estão assistindo TV?</div>
+      <div class="tip-line">
+        Tip: Yes/No questions no continuous: <strong>Am/Is/Are</strong> + subject + verb-ing.
+      </div>
+
+      <div class="voice-row">
+        <button class="voice-btn" onclick="speak('Are they watching TV?')">🔊 Play</button>
+        <span>Você quer saber se as crianças estão na TV: “Are they watching TV?”</span>
+      </div>
+
+      <div class="walkthrough">
+        <strong>Presente vs passado do to be:</strong>
+        <ul class="steps-list">
+          <li><strong>Presente:</strong> am / is / are → perguntas: Am I…? Is he…? Are they…?</li>
+          <li><strong>Passado:</strong> was / were → perguntas: Was he…? Were they…?</li>
+        </ul>
+        <p style="margin-top:6px;font-size:0.9rem;">
+          Exemplos no passado (para sentir a lógica):<br/>
+          Afirmativa: <strong>He was tired.</strong> → Pergunta: <strong>Was he tired?</strong><br/>
+          Afirmativa: <strong>They were at home.</strong> → Pergunta: <strong>Were they at home?</strong>
+        </p>
+      </div>
+
+      <div class="adhd-box">
+        <strong>Macete to be – presente & passado:</strong><br/>
+        I / He / She / It → <strong>am / is / was</strong><br/>
+        We / You / They → <strong>are / were</strong><br/>
+        Na pergunta, sempre empurra esse be pra frente: <strong>Are they…? Were they…?</strong>
+      </div>
+
+      <div class="mini-practice">
+        <strong>✍️ Copie “Are they watching TV?”</strong>
+        <label>1. Auxiliar:
+          <input class="mini-input" placeholder="Are" />
+        </label>
+        <label>2. Subject:
+          <input class="mini-input" placeholder="they" />
+        </label>
+        <label>3. Verb-ing:
+          <input class="mini-input" placeholder="watching" />
+        </label>
+        <label>4. Object:
+          <input class="mini-input" placeholder="TV?" />
+        </label>
+      </div>
+
+      <!-- Extra walk-through exercise -->
+      <div class="mini-practice">
+        <strong>✍️ Guided: passado com WAS / WERE</strong>
+        <p style="font-size:0.85rem;">Eles estavam no trabalho. → Were they at work?</p>
+        <ol class="steps-list">
+          <li>Afirmativa: <strong>They were at work.</strong></li>
+          <li>Pergunta: ______ they at work?</li>
+        </ol>
+        <label>Auxiliar que sobe:
+          <input class="mini-input" placeholder="Were" />
+        </label>
+        <p style="font-size:0.85rem;margin-top:4px;">Resultado: <strong>Were they at work?</strong></p>
+      </div>
+    </section>
+  </main>
+
+  <div class="footer-nav">
+    <button class="secondary-btn" onclick="prevTab()">⬅️ Back</button>
+    <button class="primary-btn" onclick="nextTab()">Next ➡️</button>
+  </div>
+
+  <div class="export-bar">
+    <span>📋 Exportar texto da aula:</span>
+    <button class="small-btn" onclick="copyToSpreadsheet()">Copiar p/ planilha</button>
+  </div>
+
+  <footer class="footer-meta">
+    <span class="brand">NEXTATION</span> · Questions em blocos. É nosso. 🚀
+  </footer>
+</div>
+
+<script>
+  const tabOrder = [
+    'overview',
+    'do-like',
+    'where-library',
+    'does-he',
+    'did-they',
+    'what-doing',
+    'are-they'
+  ];
+
+  function showTab(id){
+    var panels = document.querySelectorAll('.panel');
+    for(var i=0;i<panels.length;i++){
+      var p = panels[i];
+      p.classList.toggle('active', p.id === 'panel-' + id);
+    }
+    var tabs = document.querySelectorAll('.tab');
+    for(var j=0;j<tabs.length;j++){
+      var t = tabs[j];
+      t.classList.toggle('active', t.dataset.tab === id);
+    }
+  }
+
+  function nextTab(){
+    var activeTab = document.querySelector('.tab.active');
+    if(!activeTab) return;
+    var current = activeTab.dataset.tab;
+    var idx = tabOrder.indexOf(current);
+    if(idx >= 0 && idx < tabOrder.length - 1){
+      showTab(tabOrder[idx+1]);
+    }
+  }
+
+  function prevTab(){
+    var activeTab = document.querySelector('.tab.active');
+    if(!activeTab) return;
+    var current = activeTab.dataset.tab;
+    var idx = tabOrder.indexOf(current);
+    if(idx > 0){
+      showTab(tabOrder[idx-1]);
+    }
+  }
+
+  function speak(text){
+    if(!('speechSynthesis' in window)){
+      alert('SpeechSynthesis not supported in this browser.');
+      return;
+    }
+    window.speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-US';
+    u.rate = 0.98;
+    u.pitch = 1.0;
+    window.speechSynthesis.speak(u);
+  }
+
+  function normalizeSimple(str){
+    if(!str) return '';
+    var out = str.toLowerCase();
+    if(out.charAt(out.length-1) === '?' || out.charAt(out.length-1) === '.'){
+      out = out.slice(0,-1);
+    }
+    out = out.replace('  ',' ');
+    out = out.replace('  ',' ');
+    out = out.trim();
+    return out;
+  }
+
+  function checkOverviewExercise(){
+    var aux = document.getElementById('ex-aux').value;
+    var subj = document.getElementById('ex-subject').value;
+    var verb = document.getElementById('ex-verb').value;
+    var rest = document.getElementById('ex-rest').value;
+    var sentence = document.getElementById('ex-sentence').value;
+    var feedback = document.getElementById('ex-feedback');
+
+    if(!aux || !subj || !verb || !rest){
+      feedback.textContent = 'Escolha todos os blocos: auxiliar, sujeito, verbo e resto.';
+      feedback.style.color = '#ffe25f';
+      return;
+    }
+    if(!sentence || !sentence.trim()){
+      feedback.textContent = 'Agora escreve a pergunta completa em inglês.';
+      feedback.style.color = '#ffe25f';
+      return;
+    }
+
+    var target = aux + ' ' + subj + ' ' + verb + ' ' + rest + '?';
+    var userNorm = normalizeSimple(sentence);
+    var targetNorm = normalizeSimple(target);
+
+    if(userNorm === targetNorm){
+      feedback.textContent = 'Perfeito! "' + target + '" – blocos na ordem certa.';
+      feedback.style.color = '#4dff9b';
+    }else{
+      feedback.textContent = 'Quase. Modelo esperado: ' + target;
+      feedback.style.color = '#ff8aa8';
+    }
+  }
+
+  function checkOverviewExercise2(){
+    var q1 = document.getElementById('ex2-q1').value;
+    var q2 = document.getElementById('ex2-q2').value;
+    var feedback = document.getElementById('ex2-feedback');
+
+    var target1 = 'Do you like music?';
+    var target2 = 'Does he like music?';
+
+    var ok1 = normalizeSimple(q1) === normalizeSimple(target1);
+    var ok2 = normalizeSimple(q2) === normalizeSimple(target2);
+
+    if(ok1 && ok2){
+      feedback.textContent = 'Excelente! DO para you, DOES para he. Fixado! ✅';
+      feedback.style.color = '#4dff9b';
+    }else if(ok1 || ok2){
+      feedback.textContent = 'Metade certa. Confere se a outra frase está com o auxiliar correto (Do/Does).';
+      feedback.style.color = '#ffe25f';
+    }else{
+      feedback.textContent = 'Ainda não. Lembra: Do you like…? / Does he like…?';
+      feedback.style.color = '#ff8aa8';
+    }
+  }
+
+  function copyToSpreadsheet(){
+    var panels = document.querySelectorAll('.panel');
+    var text = '';
+    for(var i=0;i<panels.length;i++){
+      if(i>0) text += '\n\n-----------------------------\n\n';
+      text += panels[i].innerText.trim();
+    }
+    if(!navigator.clipboard){
+      alert('Seu navegador não permite copiar automaticamente. Copie manualmente.');
+      return;
+    }
+    navigator.clipboard.writeText(text)
+      .then(function(){ alert('Conteúdo copiado. Cole (Ctrl+V) na planilha.'); })
+      .catch(function(){ alert('Copie manualmente (Ctrl+C).'); });
+  }
+</script>
+</body>
+</html>
